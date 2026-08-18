@@ -216,3 +216,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- project-specific ---------------------------------------------------
+# Generated at first run by webserver/database/db_handler.ensure_db()
+webserver/database/app.db
+
+# Locally trained models (sqli_model.joblib is committed on purpose)
+ml/*.joblib
+!ml/sqli_model.joblib
+
+# sqlmap working output
+.sqlmap/

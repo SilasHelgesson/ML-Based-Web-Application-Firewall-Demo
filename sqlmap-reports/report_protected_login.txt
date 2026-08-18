@@ -1,0 +1,66 @@
+        ___
+       __H__
+ ___ ___[(]_____ ___ ___  {1.10.6.116#dev}
+|_ -| . [.]     | .'| . |
+|___|_  [)]_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 22:47:37 /2026-06-15/
+
+[22:47:38] [INFO] flushing session file
+[22:47:38] [INFO] testing connection to the target URL
+[22:47:38] [INFO] checking if the target is protected by some kind of WAF/IPS
+[22:47:38] [CRITICAL] heuristics detected that the target is protected by some kind of WAF/IPS
+are you sure that you want to continue with further target testing? [Y/n] Y
+[22:47:38] [WARNING] please consider usage of tamper scripts (option '--tamper')
+[22:47:38] [INFO] testing if the target URL content is stable
+[22:47:38] [INFO] target URL content is stable
+[22:47:38] [INFO] testing if POST parameter 'username' is dynamic
+[22:47:38] [WARNING] POST parameter 'username' does not appear to be dynamic
+[22:47:38] [WARNING] heuristic (basic) test shows that POST parameter 'username' might not be injectable
+[22:47:38] [INFO] testing for SQL injection on POST parameter 'username'
+[22:47:38] [INFO] testing 'AND boolean-based blind - WHERE or HAVING clause'
+[22:47:38] [INFO] testing 'Boolean-based blind - Parameter replace (original value)'
+[22:47:38] [INFO] testing 'MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)'
+[22:47:38] [INFO] testing 'PostgreSQL AND error-based - WHERE or HAVING clause'
+[22:47:38] [INFO] testing 'Microsoft SQL Server/Sybase AND error-based - WHERE or HAVING clause (IN)'
+[22:47:39] [INFO] testing 'Oracle AND error-based - WHERE or HAVING clause (XMLType)'
+[22:47:39] [INFO] testing 'Generic inline queries'
+[22:47:39] [INFO] testing 'PostgreSQL > 8.1 stacked queries (comment)'
+[22:47:39] [INFO] testing 'Microsoft SQL Server/Sybase stacked queries (comment)'
+[22:47:39] [INFO] testing 'Oracle stacked queries (DBMS_PIPE.RECEIVE_MESSAGE - comment)'
+[22:47:39] [INFO] testing 'MySQL >= 5.0.12 AND time-based blind (query SLEEP)'
+[22:47:39] [INFO] testing 'PostgreSQL > 8.1 AND time-based blind'
+[22:47:39] [INFO] testing 'Microsoft SQL Server/Sybase time-based blind (IF)'
+[22:47:39] [INFO] testing 'Oracle AND time-based blind'
+it is recommended to perform only basic UNION tests if there is not at least one other (potential) technique found. Do you want to reduce the number of requests? [Y/n] Y
+[22:47:39] [INFO] testing 'Generic UNION query (NULL) - 1 to 10 columns'
+[22:47:39] [WARNING] POST parameter 'username' does not seem to be injectable
+[22:47:39] [INFO] testing if POST parameter 'password' is dynamic
+[22:47:39] [WARNING] POST parameter 'password' does not appear to be dynamic
+[22:47:39] [WARNING] heuristic (basic) test shows that POST parameter 'password' might not be injectable
+[22:47:39] [INFO] testing for SQL injection on POST parameter 'password'
+[22:47:39] [INFO] testing 'AND boolean-based blind - WHERE or HAVING clause'
+[22:47:39] [INFO] testing 'Boolean-based blind - Parameter replace (original value)'
+[22:47:39] [INFO] testing 'MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)'
+[22:47:39] [INFO] testing 'PostgreSQL AND error-based - WHERE or HAVING clause'
+[22:47:39] [INFO] testing 'Microsoft SQL Server/Sybase AND error-based - WHERE or HAVING clause (IN)'
+[22:47:39] [INFO] testing 'Oracle AND error-based - WHERE or HAVING clause (XMLType)'
+[22:47:40] [INFO] testing 'Generic inline queries'
+[22:47:40] [INFO] testing 'PostgreSQL > 8.1 stacked queries (comment)'
+[22:47:40] [INFO] testing 'Microsoft SQL Server/Sybase stacked queries (comment)'
+[22:47:40] [INFO] testing 'Oracle stacked queries (DBMS_PIPE.RECEIVE_MESSAGE - comment)'
+[22:47:40] [INFO] testing 'MySQL >= 5.0.12 AND time-based blind (query SLEEP)'
+[22:47:40] [INFO] testing 'PostgreSQL > 8.1 AND time-based blind'
+[22:47:40] [INFO] testing 'Microsoft SQL Server/Sybase time-based blind (IF)'
+[22:47:40] [INFO] testing 'Oracle AND time-based blind'
+[22:47:40] [INFO] testing 'Generic UNION query (NULL) - 1 to 10 columns'
+[22:47:40] [WARNING] POST parameter 'password' does not seem to be injectable
+[22:47:40] [CRITICAL] all tested parameters do not appear to be injectable. Try to increase values for '--level'/'--risk' options if you wish to perform more tests. If you suspect that there is some kind of protection mechanism involved (e.g. WAF) maybe you could try to use option '--tamper' (e.g. '--tamper=space2comment') and/or switch '--random-agent'
+[22:47:40] [WARNING] HTTP error codes detected during run:
+403 (Forbidden) - 141 times, 500 (Internal Server Error) - 2 times
+
+[*] ending @ 22:47:40 /2026-06-15/
+

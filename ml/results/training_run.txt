@@ -1,0 +1,75 @@
+Recorded output of the two reference runs. Reproduce from ml/ with:
+
+    python train.py --data data/SQLiV3.csv --text-col 0 --label-col 1
+    python evaluate_model.py --model sqli_model.joblib --data data/fuzzed_data.csv
+
+==========================================================================
+1. Training + held-out evaluation on SQLiV3 (75/25 stratified split)
+==========================================================================
+
+Loading data from data/SQLiV3.csv ...
+  (load_csv: dropped 54 rows with unrecognized labels, 1 with empty text)
+Total: 30863  |  benign: 19517  malicious: 11346
+
+Training pipeline on 23147 samples ...
+  fit time: 5.79s
+
+=== Classification report (threshold 0.5) ===
+              precision    recall  f1-score   support
+
+      benign      0.998     0.998     0.998      4879
+   malicious      0.996     0.997     0.997      2837
+
+    accuracy                          0.998      7716
+   macro avg      0.997     0.997     0.997      7716
+weighted avg      0.998     0.998     0.998      7716
+
+Confusion matrix [rows=true, cols=pred]  (0=benign, 1=malicious):
+            pred:benign  pred:malicious
+  benign          4869            10
+  malicious          9          2828
+
+ROC-AUC:  0.9993
+PR-AUC :  0.9968
+
+Threshold sweep (precision/recall on the attack class):
+    thr  precision   recall      f1
+   0.30      0.995    0.998   0.996
+   0.50      0.996    0.997   0.997
+   0.70      0.998    0.994   0.996
+   0.90      0.998    0.983   0.991
+
+=== Per-request inference latency ===
+  samples timed : 2000
+  mean          : 1.8197 ms/request
+  median        : 1.7581 ms/request
+  p95           : 2.3511 ms/request
+  p99           : 2.8908 ms/request
+  batch per-item: 0.1791 ms (if you batch)
+
+Saved model -> sqli_model.joblib
+
+==========================================================================
+2. Adversarial evaluation (WAF-A-MoLE payloads, none seen during training)
+==========================================================================
+
+ py .\evaluate_model.py --model .\sqli_model.joblib --data .\dataset\fuzzed_data.csv                                             
+Here                      
+9627 samples | classes present: [1]
+
+Single-class set: all attacks (recall = detection rate)
+  threshold 0.30:   97.90%
+  threshold 0.50:   97.11%
+  threshold 0.70:   96.10%
+  threshold 0.90:   93.94%
+
+  mean P(malicious): 0.967
+  worst misses (lowest P(malicious)):
+    p=0.005  'SeLECt'
+    p=0.005  'SELect'
+    p=0.007  'PROCEDure'
+    p=0.007  'OrDER\tBY'
+    p=0.008  'PrOcedUrE'
+    p=0.014  'uNI ON\xa0SEL?ECT'
+    p=0.015  "1'\xa0/)`$;WHere\x0c5x84c,.= \t0B111000000001"
+    p=0.019  '0 uNi on SEleCt ALL From wHerE'

